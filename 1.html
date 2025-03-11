@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILA | Bio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 15px; /* Уменьшенный отступ */
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-size: 32px;
+            margin-bottom: 5px; /* Уменьшенный отступ снизу */
+            color: #ffffff88;
+        }
+
+        .bio {
+            font-size: 16px;
+            color: #ffffffbb;
+            margin-bottom: 15px; /* Уменьшенный отступ */
+        }
+
+        .links {
+            margin-top: 10px; /* Добавлен отступ сверху */
+        }
+
+        .links a {
+            display: block;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            color: rgb(0, 0, 0) !important;
+            padding: 12px;
+            margin: 10px 0; /* Уменьшенные отступы между кнопками */
+            border-radius: 25px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .links a:hover {
+            transform: translateY(-2px);
+            box-shadow:  ㅇ0 4px 10px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #3d3b3b, #3f4142);
+        }
+
+        .links i {
+            margin-right: 10px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .social-icons a {
+            color: #000000;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #007bff;
+        }
+
+        /* Стили для аудиоплеера */
+        #backgroundMusic {
+            display: none;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .overlay-message {
+            font-size: 24px;
+            color: #2c3e50;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <img src="https://archive.strct.cc/ddnet/media/HammerTeeSticker-1A904.png" 
+                 alt="Аватар" 
+                 class="avatar">
+            <h1 class="name">ILA</h1>
+            <p class="bio">I love ddnet</p>
+            
+            <!-- Кнопки перемещены сразу под именем -->
+            <div class="links">
+                <a href="https://t.me/ILAfromTee" target="_blank">
+                    <i class="fab fa-telegram"></i> Telegram
+                </a>
+                <a href="https://t.me/lifeoftasmaker" target="_blank">
+                    <i class="fab fa-telegram"></i> Telegram Channel
+                </a>
+            </style>
+            <!-- Счетчик посещений -->
+            <div class="eye-counter">
+                <i class="fas fa-eye"></i>
+                <span id="visitorCount">0</span>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="https://www.youtube.com/@GeniusMainGG" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+    
+        <script>
+            counterRef.on('value', (snapshot) => {
+                const count = snapshot.val();
+                document.getElementById('visitorCount').textContent = count;
+            });
+        </script>
+            </div>
+        </div>
+        <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автозапуск музыки</title>
+    <style>
+        body {
+            margin: 0;
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Скрытый аудиоплеер -->
+    <audio id="backgroundMusic" class="hidden" autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио
+    </audio>
+
+    <script>
+        // Попытка обхода ограничений автовоспроизведения
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('backgroundMusic');
+            
+            // Первая попытка воспроизведения
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Вторая попытка после первого взаимодействия
+                    document.body.addEventListener('click', () => {
+                        audio.play();
+                    }, { once: true });
+                });
+            }
+        });
+
+        // Альтернативный метод с использованием Web Audio API
+        window.onload = async () => {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const response = await fetch('ваша-музыка.mp3');
+                const arrayBuffer = await response.arrayBuffer();
+                const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                
+                const source = audioContext.createBufferSource();
+                source.buffer = audioBuffer;
+                source.connect(audioContext.destination);
+                source.start(0);
+            } catch (e) {
+                console.error('Автовоспроизведение заблокировано:', e);
+            }
+        };
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Остальные метатеги и стили остаются без изменений -->
+    <style>
+        /* Добавляем новые стили для оверлея */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .overlay-message {
+            font-size: 24px;
+            color: #b9e3ff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Добавляем оверлей в начало body -->
+    <div class="overlay" id="overlay">
+        <div class="overlay-message">Нажмите, чтобы продолжить</div>
+    </div>
+
+    <!-- Остальной HTML-код остается без изменений -->
+    <div class="container">
+        <!-- ... существующее содержимое ... -->
+    </div>
+
+    <script>
+        // Модифицированный скрипт
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('overlay');
+            const audio = document.getElementById('backgroundMusic');
+
+            // Обработчик клика по оверлею
+            overlay.addEventListener('click', () => {
+                overlay.style.display = 'none';
+                
+                // Попытка запуска музыки после клика
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        console.log('Автовоспроизведение заблокировано');
+                    });
+                }
+            });
+
+            // Инициализация аудио
+            audio.muted = true; // Начинаем с отключенного звука
+            const initPromise = audio.play();
+            
+            if (initPromise !== undefined) {
+                initPromise.catch(() => {
+                    audio.muted = false;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- ... остальные метатеги и стили ... -->
+    <style>
+        /* Добавляем стили для ползунка громкости */
+        .volume-control {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .volume-slider {
+            width: 120px;
+            height: 5px;
+            -webkit-appearance: none;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #007bff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: #0056b3;
+        }
+
+        .volume-icon {
+            color: #666;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ... ваш существующий контент ... -->
+
+    <!-- Добавляем блок управления громкостью -->
+    <div class="volume-control">
+        <i class="fas fa-volume-up volume-icon"></i>
+        <input 
+            type="range" 
+            class="volume-slider" 
+            min="0" 
+            max="100" 
+            value="50"
+            id="volumeSlider"
+        >
+    </div>
+
+    <script>
+        // Получаем элементы управления
+        const audio = document.getElementById('backgroundMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        // Устанавливаем начальную громкость
+        audio.volume = volumeSlider.value / 100;
+
+        // Обработчик изменения ползунка
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+            
+            // Меняем иконку в зависимости от громкости
+            const volumeIcon = document.querySelector('.volume-icon');
+            if (e.target.value == 0) {
+                volumeIcon.className = 'fas fa-volume-mute volume-icon';
+            } else if (e.target.value < 50) {
+                volumeIcon.className = 'fas fa-volume-down volume-icon';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up volume-icon';
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILA | Bio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Добавляем стили для видео-фона */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        #bgVideo {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        /* Затемнение фона */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* Адаптация существующих стилей */
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Остальные ваши стили остаются без изменений */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ... остальные ваши стили ... */
+    </style>
+</head>
+<body>
+    <!-- Фоновое видео -->
+    <div class="video-background">
+        <video id="bgVideo" autoplay muted loop playsinline>
+            <source src="jesko.mp4" type="video/mp4">
+            <source src="your-video.webm" type="video/webm">
+            Ваш браузер не поддерживает видео-фон.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+
+
+    <script>
+        // Оптимизация для мобильных устройств
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('bgVideo');
+            
+            // Пауза/воспроизведение при изменении видимости вкладки
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    video.pause();
+                } else {
+                    video.play();
+                }
+            });
+
+            // Попытка повторного воспроизведения при ошибке
+            video.addEventListener('error', function() {
+                setTimeout(() => video.play(), 1000);
+            });
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- ... остальные метатеги и стили ... -->
+    <style>
+        .bio {
+            font-size: 16px;
+            color: #2e8ee7; /* Изменил цвет текста на белый */
+            margin-bottom: 15px;
+            position: relative;
+            animation: strong-glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8),
+                         0 0 30px rgba(0, 123, 255, 0.6),
+                         0 0 45px rgba(0, 123, 255, 0.4),
+                         0 0 60px rgba(0, 123, 255, 0.2);
+        }
+
+        @keyframes strong-glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 123, 255, 1),
+                             0 0 40px rgba(0, 123, 255, 0.8),
+                             0 0 60px rgba(0, 123, 255, 0.6),
+                             0 0 80px rgba(0, 123, 255, 0.4);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(0, 123, 255, 1),
+                             0 0 60px rgba(0, 123, 255, 0.8),
+                             0 0 90px rgba(0, 123, 255, 0.6),
+                             0 0 120px rgba(0, 123, 255, 0.4);
+            }
+        }
+
+        /* Дополнительный фон для лучшей видимости */
+        .profile {
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.3);
+        }
+    </style>
+</head>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- ... остальные метатеги и стили ... -->
+    <style>
+        .name {
+            font-size: 32px;
+            color: #2e8ee7; /* Изменил цвет текста на белый */
+            margin-bottom: 15px;
+            position: relative;
+            animation: strong-glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8),
+                         0 0 30px rgba(0, 123, 255, 0.6),
+                         0 0 45px rgba(0, 123, 255, 0.4),
+                         0 0 60px rgba(0, 123, 255, 0.2);
+        }
+
+        @keyframes strong-glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 123, 255, 1),
+                             0 0 40px rgba(0, 123, 255, 0.8),
+                             0 0 60px rgba(0, 123, 255, 0.6),
+                             0 0 80px rgba(0, 123, 255, 0.4);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(0, 123, 255, 1),
+                             0 0 60px rgba(0, 123, 255, 0.8),
+                             0 0 90px rgba(0, 123, 255, 0.6),
+                             0 0 120px rgba(0, 123, 255, 0.4);
+            }
+        }
+
+    </style>
+</head>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- ... остальные метатеги и стили ... -->
+    <style>
+        .social-icons {
+            font-size: px;
+            color: #2e8ee7; /* Изменил цвет текста на белый */
+            margin-bottom: 15px;
+            position: relative;
+            animation: strong-glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8),
+                         0 0 30px rgba(0, 123, 255, 0.6),
+                         0 0 45px rgba(0, 123, 255, 0.4),
+                         0 0 60px rgba(0, 123, 255, 0.2);
+        }
+
+        @keyframes strong-glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 123, 255, 1),
+                             0 0 40px rgba(0, 123, 255, 0.8),
+                             0 0 60px rgba(0, 123, 255, 0.6),
+                             0 0 80px rgba(0, 123, 255, 0.4);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(0, 123, 255, 1),
+                             0 0 60px rgba(0, 123, 255, 0.8),
+                             0 0 90px rgba(0, 123, 255, 0.6),
+                             0 0 120px rgba(0, 123, 255, 0.4);
+            }
+        }    
+        </style>
+</head>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Добавьте этот код в секцию head -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
+    <script>
+        // Конфигурация Firebase (замените на свои данные)
+        const firebaseConfig = {
+            apiKey: "AIzaSyABCDEFGHIJKLMNOPQRSTUVWXYZ12345678",
+            authDomain: "your-project-id.firebaseapp.com",
+            databaseURL: "https://your-project-id.firebaseio.com",
+            projectId: "ppl1-8c66c",
+            storageBucket: "your-project-id.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890abcdef"
+        };
+
+        // Инициализация Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Счетчик посещений
+        window.addEventListener('DOMContentLoaded', () => {
+            const db = firebase.database();
+            const counterRef = db.ref('visitorCount');
+            
+            counterRef.transaction(currentCount => {
+                return (currentCount || 0) + 1;
+            });
+            
+            counterRef.on('value', (snapshot) => {
+                const count = snapshot.val();
+                document.getElementById('visitorCount').textContent = 
+                    `Посетителей: ${count}`;
+            });
+        });
+    </script>
+
+    <!-- Добавьте в стили -->
+    <style>
+        .visitor-counter {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+            animation: counter-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes counter-glow {
+            from { box-shadow: 0 0 5px rgba(0,123,255,0.3); }
+            to { box-shadow: 0 0 15px rgba(0,123,255,0.5); }
+        }
+    </style>
+</head>
+<body>
+</body>
+</html>
+<!-- Добавьте в раздел стилей -->
+<style>
+    .eye-counter {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 15px;
+        animation: icon-glow 1.5s ease-in-out infinite alternate;
+    }
+    
+    .eye-counter i {
+        font-size: 20px;
+        color: #007bff;
+    }
+    
+    .eye-counter span {
+        color: #32b4ff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <head>
+        <!-- ... остальные метатеги и стили ... -->
+        <style>
+            .eye-counter {
+                font-size: 16px;
+                color: #2e8ee7; /* Изменил цвет текста на белый */
+                margin-bottom: 15px;
+                position: relative;
+                animation: strong-glow 1.5s ease-in-out infinite alternate;
+                text-shadow: 0 0 15px rgba(0, 123, 255, 0.8),
+                             0 0 30px rgba(0, 123, 255, 0.6),
+                             0 0 45px rgba(0, 123, 255, 0.4),
+                             0 0 60px rgba(0, 123, 255, 0.2);
+            }
+    
+            @keyframes strong-glow {
+                from {
+                    text-shadow: 0 0 20px rgba(0, 123, 255, 1),
+                                 0 0 40px rgba(0, 123, 255, 0.8),
+                                 0 0 60px rgba(0, 123, 255, 0.6),
+                                 0 0 80px rgba(0, 123, 255, 0.4);
+                }
+                to {
+                    text-shadow: 0 0 30px rgba(0, 123, 255, 1),
+                                 0 0 60px rgba(0, 123, 255, 0.8),
+                                 0 0 90px rgba(0, 123, 255, 0.6),
+                                 0 0 120px rgba(0, 123, 255, 0.4);
+                }
+            }
+        </style>
+    </head>
+    </body>
+    </html>
+    <!-- Добавьте этот стиль в раздел <style> -->
+<style>
+    .snow {
+        position: fixed;
+        top: -10px;
+        pointer-events: none;
+        z-index: 9999;
+        color: #fff;
+        text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) translateX(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) translateX(50px) rotate(360deg);
+            opacity: 0.3;
+        }
+    }
+</style>
+
+<!-- Добавьте этот скрипт перед закрывающим тегом </body> -->
+<script>
+    function createSnow() {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snow');
+        snowflake.innerHTML = '❄';
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        snowflake.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
+        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+        snowflake.style.opacity = Math.random();
+        
+        document.body.appendChild(snowflake);
+        
+        // Удаление снежинки после завершения анимации
+        setTimeout(() => {
+            snowflake.remove();
+        }, 5000);
+    }
+
+    // Запуск снегопада
+    window.addEventListener('load', () => {
+        setInterval(createSnow, 100);
+    });
+</script>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- ... остальные метатеги и стили ... -->
+    <style>
+        .volume-icon {
+            font-size: 16px;
+            color: #2e8ee7; /* Изменил цвет текста на белый */
+            margin-bottom: 15px;
+            position: relative;
+            animation: strong-glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8),
+                         0 0 30px rgba(0, 123, 255, 0.6),
+                         0 0 45px rgba(0, 123, 255, 0.4),
+                         0 0 60px rgba(0, 123, 255, 0.2);
+        }
+
+        @keyframes strong-glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 123, 255, 1),
+                             0 0 40px rgba(0, 123, 255, 0.8),
+                             0 0 60px rgba(0, 123, 255, 0.6),
+                             0 0 80px rgba(0, 123, 255, 0.4);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(0, 123, 255, 1),
+                             0 0 60px rgba(0, 123, 255, 0.8),
+                             0 0 90px rgba(0, 123, 255, 0.6),
+                             0 0 120px rgba(0, 123, 255, 0.4);
+            }
+        }
+    </style>
+</head>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- ... остальные метатеги и стили ... -->
+    <style>
+        .volume-slider {
+            font-size: 16px;
+            color: #2e8ee7; /* Изменил цвет текста на белый */
+            margin-bottom: 15px;
+            position: relative;
+            animation: strong-glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8),
+                         0 0 30px rgba(0, 123, 255, 0.6),
+                         0 0 45px rgba(0, 123, 255, 0.4),
+                         0 0 60px rgba(0, 123, 255, 0.2);
+        }
+
+        @keyframes strong-glow {
+            from {
+                text-shadow: 0 0 20px rgba(0, 123, 255, 1),
+                             0 0 40px rgba(0, 123, 255, 0.8),
+                             0 0 60px rgba(0, 123, 255, 0.6),
+                             0 0 80px rgba(0, 123, 255, 0.4);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(0, 123, 255, 1),
+                             0 0 60px rgba(0, 123, 255, 0.8),
+                             0 0 90px rgba(0, 123, 255, 0.6),
+                             0 0 120px rgba(0, 123, 255, 0.4);
+            }
+        }
+    </style>
+</head>
+</body>
+</html>
